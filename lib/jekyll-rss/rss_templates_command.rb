@@ -4,7 +4,7 @@ module Jekyll
       class << self
         def init_with_program(prog)
           prog.command(:rss_template) do |c|
-            c.syntax 'rss_template'
+            c.syntax 'rss_template [options]'
             c.description 'Create the template files you need to format your RSS/Atom feeds.'
             c.option 'blog', '-B', '--blog', 'Generate the blog RSS/Atom feed template'
             c.option 'category', '-C', '--category', 'Generate the category RSS/Atom feed template'
