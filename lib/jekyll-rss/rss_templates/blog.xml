@@ -1,0 +1,35 @@
+---
+permalink: /rss/feed.xml
+paginated_permalink: /rss/:num/feed.xml
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <title>{{ site.name | xml_escape }}</title>
+        <description>{% if site.description %}{{ site.description | xml_escape }}{% endif %}</description>
+        <link>{{ site.site_url }}</link>
+        <atom:link href="{{ site.site_url }}{{ page.url }}" rel="self" type="application/rss+xml" />
+        {% if paginator.next_page %}
+        <atom:link href="{{ site.site_url }}{{ paginator.next_page_path }}" rel="next" type="application/rss+xml" />
+        {% endif %}
+        {% if paginator.previous_page %}
+        <atom:link href="{{ site.site_url }}{{ paginator.previous_page_path }}" rel="previous" type="application/rss+xml" />
+        {% endif %}
+        {% for post in paginator.posts %}
+        <item>
+            <title>{{ post.title | xml_escape }}</title>
+            {% if post.author.name %}
+            <dc:creator>{{ post.author | xml_escape }}</dc:creator>
+            {% endif %}
+            {% if post.excerpt %}
+            <description>{{ post.excerpt | xml_escape }}</description>
+            {% else %}
+            <description>{{ post.content | xml_escape }}</description>
+            {% endif %}
+            <pubDate>{{ post.date | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
+            <link>{{ site.site_url }}{{ post.url }}</link>
+            <guid isPermaLink="true">{{ site.site_url }}{{ post.url }}</guid>
+        </item>
+        {% endfor %}
+    </channel>
+</rss>
