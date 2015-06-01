@@ -1,5 +1,5 @@
 module Jekyll
   module RSS
-    VERSION = "1.0.0rc1"
+    VERSION = "0.0.1-alpha"
   end
 end
