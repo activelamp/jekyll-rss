@@ -6,6 +6,7 @@ module Jekyll
 
       def initialize(site, page_num, posts, per_page, index_page)
         @index_page = index_page
+        posts = posts.sort_by { |post| -post.date.to_f }
         super site, page_num, posts, per_page
         @previous_page_path = paginate_path site, @previous_page
         @next_page_path = paginate_path site, @next_page
