@@ -7,7 +7,7 @@ paginated_permalink: /rss/:num/:category.xml
     <channel>
         <title>{{ site.name | xml_escape }}</title>
         <description>{% if site.description %}{{ site.description | xml_escape }}{% endif %}</description>
-        <link>{{ site.site_url }}/{{ page.category_slug }}</link>
+        <link>{{ site.site_url }}/{{ page.tag_slug }}</link>
         <atom:link href="{{ site.site_url }}{{ page.url }}" rel="self" type="application/rss+xml" />
         {% if paginator.next_page %}
         <atom:link href="{{ site.site_url }}{{ paginator.next_page_path }}" rel="next" type="application/rss+xml" />

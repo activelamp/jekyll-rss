@@ -8,6 +8,7 @@ module Jekyll
             c.description 'Create the template files you need to format your RSS/Atom feeds.'
             c.option 'blog', '-B', '--blog', 'Generate the blog RSS/Atom feed template'
             c.option 'category', '-C', '--category', 'Generate the category RSS/Atom feed template'
+            c.option 'tag', '-T', '--tag', 'Generate the tag RSS/Atom feed template'
 
             c.action do |args, options|
               process options
@@ -17,7 +18,7 @@ module Jekyll
 
         def process(options)
           config = configuration_from_options(options)
-          %w(blog category).each do |template|
+          %w(blog category tag).each do |template|
             create_template(config, template) if config[template]
           end
         end
