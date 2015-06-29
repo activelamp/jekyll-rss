@@ -9,6 +9,8 @@ module Jekyll
         @tag = tag
         @tag_slug = tag.strip.gsub(' ', '-').gsub(NON_SLUG_REGEX, '')
         super site, path
+        self.data['tag'] = tag.split(' ').map(&:capitalize).join(' ')
+        self.data['tag_slug'] = @tag_slug
       end
       
       def url_placeholders

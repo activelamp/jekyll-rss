@@ -9,6 +9,8 @@ module Jekyll
         @category = category
         @category_slug = category.strip.gsub(' ', '-').gsub(NON_SLUG_REGEX, '')
         super site, path
+        self.data['category'] = category.split(' ').map(&:capitalize).join(' ')
+        self.data['category_slug'] = @category_slug
       end
       
       def url_placeholders
