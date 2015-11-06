@@ -1,7 +1,7 @@
 module Jekyll
   module RSS
     class Generator < ::Jekyll::Generator
-	    def generate(site)
+      def generate(site)
         return nil unless site.config['rss']
         generate_blog_feed site if File.exists? File.join(site.source, '_rss', 'blog.xml')
         generate_category_feeds site if File.exists? File.join(site.source, '_rss', 'category.xml')
@@ -23,14 +23,19 @@ module Jekyll
           site.pages << feed
         end
       end
-      
+
       def generate_tag_feeds(site)
         path = File.join site.source, '_rss', 'tag.xml'
         site.tags.each do |tag, posts|
+          posts = preprocess_tag_posts tag, posts, site
           feed = TagFeed.new site, path, tag
           paginate_tag(site, feed, tag, posts) if site.config['rss'].is_a? Hash and site.config['rss']['paginate']
           site.pages << feed
         end
+      end
+
+      def preprocess_tag_posts(tag, posts, site)
+        posts
       end
 
       def paginate_blog(site, feed)
@@ -47,7 +52,7 @@ module Jekyll
           category
         end
       end
-      
+
       def paginate_tag(site, feed, tag_name, tag_posts)
         Pagination.paginate site, feed, tag_posts do |pager|
           tag = TagFeed.new feed.site, feed.source, tag_name
@@ -56,6 +61,6 @@ module Jekyll
           tag
         end
       end
-	  end
+    end
   end
 end
